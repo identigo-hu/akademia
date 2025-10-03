@@ -58,6 +58,16 @@
     .icon-btn:hover {
       color: #004d99;
     }
+    .redirect-note {
+      margin-top: 20px;
+      font-size: 0.95em;
+      color: #666;
+    }
+    .countdown {
+      font-weight: bold;
+      color: #333;
+    }
+
   </style>
 </head>
 <body>
@@ -67,11 +77,14 @@
     <div class="event">
       <p><strong>Előadás:</strong> Pmt. Ellenőrzések a gyakorlatban és az identiGO </p>
       <p><strong>Dátum:</strong> 2025.10.09. 10:00-11:00</p>
+      <p>A belépés legkorábban az előadás előtt 10 perccel lehetséges.</p>
     </div>
     <div class="zoom-link">
-      <p>A meeting még nem kezdődött el. A belépés legkorábban az előadás előtt 10 perccel lehetséges.</p>
-      <!-- <a id="zoomLink" href="https://zoom.us/" target="_blank">Csatlakozás a Zoom meetinghez</a>
-      <button class="icon-btn" onclick="copyLink()" title="Link másolása vágólapra">📋</button> -->
+      <a id="zoomLink" href="https://us05web.zoom.us/j/85278321952?pwd=fsUaadMshbXriCoeXBTpU3mNrmbHVa.1" target="_blank">Csatlakozás a Zoom meetinghez</a>
+      <button class="icon-btn" onclick="copyLink()" title="Link másolása vágólapra">📋</button>
+    </div>
+    <div class="redirect-note">
+      Automatikus átirányítás <span class="countdown" id="countdown">60</span> másodperc múlva...
     </div>
   </div>
 
@@ -82,6 +95,20 @@
         alert("Zoom link vágólapra másolva!");
       });
     }
+
+    // Countdown + redirect
+    let timeLeft = 60;
+    const countdownEl = document.getElementById("countdown");
+    const zoomLink = document.getElementById("zoomLink").href;
+
+    const timer = setInterval(() => {
+      timeLeft--;
+      countdownEl.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        window.location.href = zoomLink;
+      }
+    }, 1000);
   </script>
 </body>
 </html>
